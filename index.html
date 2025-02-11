@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine, Zain?</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #ffcccb; 
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #ff4081; /* Pink text */
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s ease; /* Smooth transition for size and color changes */
+        }
+        .yes-button {
+            background-color: #ff4081; /* Pink button */
+            color: white;
+        }
+        .no-button {
+            background-color: #e0e0e0; /* Light gray button */
+            color: #333;
+            position: relative;
+        }
+        .gif_container img {
+            width: 200px;
+            height: auto;
+            margin-top: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #ff4081;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Would you be my Valentine, Zain?</h1>
+        <div class="buttons">
+            <button class="yes-button" onclick="handleYesClick()">Yes</button>
+            <button class="no-button" onclick="handleNoClick()">No</button>
+        </div>
+        <div class="gif_container">
+            <!-- Initial Hello Kitty GIF -->
+            <img id="valentineGif" src="https://i.pinimg.com/originals/76/a4/3d/76a43d771002177090db48598b4aa198.gif" alt="Hello Kitty holding a flower">
+        </div>
+        <div id="responseMessage" class="message hidden">
+            I knew you would say yes, yandsome! 💖
+        </div>
+    </div>
+    <script>
+        let noClickCount = 0;
+        let yesButtonSize = 18; // Initial font size for the "Yes" button
+
+        function handleYesClick() {
+            const message = document.getElementById('responseMessage');
+            message.classList.remove('hidden');
+            const gif = document.getElementById('valentineGif');
+            gif.src = "https://media.tenor.com/dgFc4LnszB4AAAAM/i-love-you-so-much-hello-kitty.gif";
+            const buttons = document.querySelector('.buttons');
+            buttons.classList.add('hidden');
+        }
+
+        function handleNoClick() {
+            const noButton = document.querySelector('.no-button');
+            const yesButton = document.querySelector('.yes-button');
+            const gif = document.getElementById('valentineGif');
+
+            noClickCount++;
+
+            // Change the "Yes" button size and color
+            yesButtonSize += 10; // Increase font size by 10px
+            yesButton.style.fontSize = `${yesButtonSize}px`;
+            yesButton.style.backgroundColor = '#77dd77'; // Pastel green
+            yesButton.style.padding = `${yesButtonSize / 2}px ${yesButtonSize}px`; // Adjust padding
+
+            // Change the "No" button color and move it around
+            noButton.style.backgroundColor = '#ff6961'; // Red
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${Math.random() * 80 + 10}%`;
+            noButton.style.top = `${Math.random() * 80 + 10}%`;
+
+            // Change the GIF based on the number of clicks
+            if (noClickCount === 1 || noClickCount === 2) {
+                gif.src = "https://media.tenor.com/hNhoZmyEjbUAAAAi/sanrio.gif";
+                alert("U sureee suree?");
+            } else if (noClickCount === 3) {
+                gif.src = "https://media.tenor.com/hNhoZmyEjbUAAAAj/sanrio.gif";
+                alert("Come on man!");
+                noButton.style.display = 'none'; // Remove the no button
+            }
+        }
+    </script>
+</body>
+</html>
