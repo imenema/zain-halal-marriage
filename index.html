@@ -25,42 +25,44 @@
       position: relative;
       width: 220px;
       height: 140px;
-      background: linear-gradient(135deg, #e8dbc7, #d1bfa3);
+      background: #e8dbc7;
       border: 2px solid #8b6f50;
-      box-shadow: inset 0 0 0 2px #fff4e0;
+      box-shadow: inset 0 0 8px #fff4e0;
       cursor: pointer;
       margin-bottom: 30px;
-      /* envelope shape lines */
+      border-radius: 6px;
+      overflow: hidden;
     }
 
-    /* Adding simple envelope lines */
+    /* Envelope flap */
     .envelope-wrapper::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
-      width: 50%;
-      height: 50%;
-      border-top: 2px solid #a98b6f;
-      border-left: 2px solid #a98b6f;
+      width: 0;
+      height: 0;
+      border-left: 110px solid transparent;
+      border-right: 110px solid transparent;
+      border-bottom: 70px solid #d1bfa3;
       box-sizing: border-box;
-      clip-path: polygon(0 0, 100% 0, 0 100%);
+      z-index: 2;
+      transition: all 0.3s ease;
     }
 
+    /* Envelope body shadow */
     .envelope-wrapper::after {
       content: '';
       position: absolute;
-      top: 0;
-      right: 0;
-      width: 50%;
-      height: 50%;
-      border-top: 2px solid #a98b6f;
-      border-right: 2px solid #a98b6f;
-      box-sizing: border-box;
-      clip-path: polygon(100% 0, 100% 100%, 0 0);
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      background: linear-gradient(to top, #c5b79a, transparent);
+      border-radius: 0 0 6px 6px;
+      z-index: 1;
     }
 
-    /* A fold line down center bottom */
     .envelope-wrapper .fold-line {
       position: absolute;
       bottom: 0;
@@ -68,6 +70,7 @@
       width: 100%;
       height: 2px;
       background: linear-gradient(to right, #a98b6f 0%, #d1bfa3 50%, #a98b6f 100%);
+      z-index: 3;
     }
 
     .note-container {
@@ -142,7 +145,8 @@
     <p>dear my very yandsome busy man,<br><br>
     my sweet dashing man you are litterly the best things that ever happened to me, i will forever be greatful to have you in my life and i truly mean it, i got very lucky with you i got to have someone who makes me laugh smile soo much that i am pretty sure at this rate i am gonna end up with ealry smile lines, someone who is always here to comfornnt me when i cry, care for me listen to me, spend time with me all your free time which i am truly greatful for that i know that you know that i miss you and i do, i miss playing with yoou , watching shows with you , talking till the morning and having u telling me to let u go sleep only for me to ask u annoying my stupid questions and it is not because iyou aren't giving me enough attention or not spending enough time with me (24h a day would still not be enough), i miss talking to you even when i am talking to you, my mind can't spend a second without you that i start feeling missing a peice when you arent here ,you are the only  person or even thing that the only time i stop thinking of you is when i am talking to you or when i am sleeping because i get to dream of you, i spend hours of my day worrying or being sad or stressed but the second i hear your voice i get instant comfort it feels like all of the seond everything will be fine, one thing you said at the start that stuck with me because i never related to something more than that ever the only thing you kept thinking of as long as we are togother everyhting will be fine as long as i am with you i know i will be happy i will feel safe i will feel loved and cared for, and i know i will love you the very smart guy with very yandsome face who keeps quizzing me keeps teaching me the very kind man who teart everyone and everything with a very kind soul, a veryyy very funny man, a strong soul , a very gentle man, a veryy hard working one i might have not said this before but i am really proud of all the work you do the studying helpig your parents taking care of everyone and being sooo nice and sweet and loving ,i can go on and onn about what i love about you but why i am in love with you it is because it is you, i really feel like you are my other half my better half i dont just feel empty with you you turned my life into a happy place with my only nightmare now being losing you<br><br>
     now i know you have being busy lately and i know you will be busy more, and i want to thank you for spending all your lil free time with me and being so nice about me being greedy for you. the only thing i do when u arent talking to me is to do my work and daydream about making you food, cleaning for you taking care of you since i cant do it now i get to daydream about it and wait till i am your wife xx<br><br>
-    i really love you zain, and i hope you dont drink soo much redbull in this very worky week and get to spend some time with me* i am still greedy forgive me mi yandsome man* but i really really love you i cant wait till i get to annoy you wiht my questions before u sleep</p></div>
+    i really love you zain, and i hope you dont drink soo much redbull in this very worky week and get to spend some time with me* i am still greedy forgive me mi yandsome man* but i really really love you i cant wait till i get to annoy you wiht my questions before u sleep</p>
+  </div>
 
   <div class="back-image" id="backImage"></div>
 
@@ -163,7 +167,6 @@
 
     let step = 0;
 
-    // Listen for clicks anywhere on the page (body)
     document.body.addEventListener('click', () => {
       step++;
       if (step === 1) {
