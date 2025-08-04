@@ -56,29 +56,28 @@
       cursor: pointer;
       z-index: 1;
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-      margin-bottom: 80px; /* space for notes below */
+      margin-bottom: 40px; /* Space to separate from notes */
     }
 
-    /* Cross lines like Jamaican flag */
     .envelope-wrapper::before,
     .envelope-wrapper::after {
       content: "";
       position: absolute;
-      width: 2px; /* thinner lines */
-      height: 314px; /* length adjusted for full diagonal across 220x140 */
+      width: 2px;
+      height: 370px;
       background-color: black;
-      top: -87px; /* positioning so lines cross corner to corner */
+      top: -115px;
       left: 50%;
       transform-origin: center;
       z-index: 2;
     }
 
     .envelope-wrapper::before {
-      transform: translateX(-50%) rotate(45deg);
+      transform: translateX(-50%) rotate(33deg);
     }
 
     .envelope-wrapper::after {
-      transform: translateX(-50%) rotate(-45deg);
+      transform: translateX(-50%) rotate(-33deg);
     }
 
     .flap {
@@ -94,26 +93,53 @@
       z-index: 3;
     }
 
+    @keyframes pop {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .note-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      z-index: 2;
+      animation: pop 0.6s ease forwards;
+    }
+
     .small-note {
-      display: block; /* make visible from start */
       font-size: 18px;
       background: #fff;
       padding: 10px 20px;
       border-radius: 8px;
       color: #000;
-      z-index: 2;
-      margin: 5px auto;
       width: max-content;
       text-align: center;
       font-weight: normal;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       user-select: none;
       cursor: default;
+      opacity: 0;
+      transform: scale(0.5);
+      animation: pop 0.5s ease forwards;
     }
 
-    /* stack notes below envelope */
-    #note1, #note2, #note3 {
-      max-width: 220px;
+    #note1 {
+      animation-delay: 0.2s;
+    }
+
+    #note2 {
+      animation-delay: 0.4s;
+    }
+
+    #note3 {
+      animation-delay: 0.6s;
     }
 
     .message-container {
@@ -173,6 +199,9 @@
 
   <div class="envelope-wrapper" id="envelope">
     <div class="flap" id="flap"></div>
+  </div>
+
+  <div class="note-container">
     <div class="small-note" id="note1">Read from a very pretty lady 💌</div>
     <div class="small-note" id="note2">Open me 💗</div>
     <div class="small-note" id="note3">Read me yandsome ✨</div>
@@ -206,7 +235,6 @@
       step++;
       if (step === 1) {
         flap.style.transform = 'rotateX(-120deg)';
-        // hide notes on first click to preserve original behavior
         note1.style.display = 'none';
         note2.style.display = 'none';
         note3.style.display = 'none';
