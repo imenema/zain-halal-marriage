@@ -1,126 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Husband, Zain?</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            background-color: #ffcccb; 
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: 'Arial', sans-serif;
-        }
-        .container {
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        h1 {
-            color: #ff4081; /* Pink text */
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-        .buttons {
-            margin-top: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 0 10px;
-            transition: all 0.3s ease; /* Smooth transition for size and color changes */
-        }
-        .yes-button {
-            background-color: #77dd77; /* Pink button */
-            color: white;
-        }
-        .no-button {
-            background-color: #ff6961; /* Light gray button */
-            color: #333;
-            position: relative;
-        }
-        .gif_container img {
-            width: 200px;
-            height: auto;
-            margin-top: 20px;
-        }
-        .hidden {
-            display: none;
-        }
-        .message {
-            margin-top: 20px;
-            font-size: 24px;
-            color: #ff4081;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Zain</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5c4cf;
+      font-family: 'Times New Roman', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      flex-direction: column;
+    }
+
+    .hearts {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+      background: pink;
+      position: absolute;
+      animation: float 6s infinite ease-in;
+      clip-path: polygon(50% 0%, 100% 30%, 85% 100%, 50% 75%, 15% 100%, 0% 30%);
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    .envelope-wrapper {
+      position: relative;
+      width: 220px;
+      height: 140px;
+      background-color: #997662;
+      cursor: pointer;
+      z-index: 1;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      margin-bottom: 80px; /* space for notes below */
+    }
+
+    /* Cross lines like Jamaican flag */
+    .envelope-wrapper::before,
+    .envelope-wrapper::after {
+      content: "";
+      position: absolute;
+      width: 2px; /* thinner lines */
+      height: 314px; /* length adjusted for full diagonal across 220x140 */
+      background-color: black;
+      top: -87px; /* positioning so lines cross corner to corner */
+      left: 50%;
+      transform-origin: center;
+      z-index: 2;
+    }
+
+    .envelope-wrapper::before {
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .envelope-wrapper::after {
+      transform: translateX(-50%) rotate(-45deg);
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background-color: #997662;
+      border-bottom: 2px solid #805e4b;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transition: transform 0.6s ease;
+      z-index: 3;
+    }
+
+    .small-note {
+      display: block; /* make visible from start */
+      font-size: 18px;
+      background: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: #000;
+      z-index: 2;
+      margin: 5px auto;
+      width: max-content;
+      text-align: center;
+      font-weight: normal;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      user-select: none;
+      cursor: default;
+    }
+
+    /* stack notes below envelope */
+    #note1, #note2, #note3 {
+      max-width: 220px;
+    }
+
+    .message-container {
+      display: none;
+      position: absolute;
+      width: 80vw;
+      max-width: 700px;
+      height: 90vh;
+      background-color: #cfc5a9;
+      color: #000;
+      font-size: 16px;
+      padding: 40px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      overflow-y: auto;
+      z-index: 3;
+      border-radius: 10px;
+    }
+
+    .back-image {
+      display: none;
+      position: absolute;
+      width: 700px;
+      height: 90vh;
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRPmqimPYFFfLyodJfY6bMsQrU4_03auc3pA&s');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 10px;
+      z-index: 4;
+    }
+
+    .back-image h2 {
+      color: white;
+      background-color: rgba(0,0,0,0.5);
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 24px;
+    }
+
+    .i-love-you {
+      display: none;
+      margin-top: 15px;
+      background-color: #fff;
+      color: red;
+      font-weight: bold;
+      padding: 10px 15px;
+      border: 1px solid red;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Would you be my Husband, Zain?</h1>
-        <div class="buttons">
-            <button class="yes-button" onclick="handleYesClick()">Yes</button>
-            <button class="no-button" onclick="handleNoClick()">No</button>
-        </div>
-        <div class="gif_container">
-            <!-- Initial Hello Kitty GIF -->
-            <img id="valentineGif" src="https://i.pinimg.com/originals/76/a4/3d/76a43d771002177090db48598b4aa198.gif" alt="Hello Kitty holding a flower">
-        </div>
-        <div id="responseMessage" class="message hidden">
-            I knew you would say yes,Halal yandsome! 💖
-        </div>
-    </div>
-    <script>
-        let noClickCount = 0;
-        let yesButtonSize = 18; // Initial font size for the "Yes" button
+  <div class="hearts"></div>
 
-        function handleYesClick() {
-            const message = document.getElementById('responseMessage');
-            message.classList.remove('hidden');
-            const gif = document.getElementById('valentineGif');
-            gif.src = "https://media.tenor.com/dgFc4LnszB4AAAAM/i-love-you-so-much-hello-kitty.gif";
-            const buttons = document.querySelector('.buttons');
-            buttons.classList.add('hidden');
-        }
+  <div class="envelope-wrapper" id="envelope">
+    <div class="flap" id="flap"></div>
+    <div class="small-note" id="note1">Read from a very pretty lady 💌</div>
+    <div class="small-note" id="note2">Open me 💗</div>
+    <div class="small-note" id="note3">Read me yandsome ✨</div>
+  </div>
 
-        function handleNoClick() {
-            const noButton = document.querySelector('.no-button');
-            const yesButton = document.querySelector('.yes-button');
-            const gif = document.getElementById('valentineGif');
+  <div class="message-container" id="letter">
+    <p>dear my very yandsome busy man,<br><br>
+    my sweet dashing man you are litterly the best things that ever happened to me, i will forever be greatful to have you in my life and i truly mean it, i got very lucky with you i got to have someone who makes me laugh smile soo much that i am pretty sure at this rate i am gonna end up with ealry smile lines, someone who is always here to comfornnt me when i cry, care for me listen to me, spend time with me all your free time which i am truly greatful for that i know that you know that i miss you and i do, i miss playing with yoou , watching shows with you , talking till the morning and having u telling me to let u go sleep only for me to ask u annoying my stupid questions and it is not because iyou aren't giving me enough attention or not spending enough time with me (24h a day would still not be enough), i miss talking to you even when i am talking to you, my mind can't spend a second without you that i start feeling missing a peice when you arent here ,you are the only  person or even thing that the only time i stop thinking of you is when i am talking to you or when i am sleeping because i get to dream of you, i spend hours of my day worrying or being sad or stressed but the second i hear your voice i get instant comfort it feels like all of the seond everything will be fine, one thing you said at the start that stuck with me because i never related to something more than that ever the only thing you kept thinking of as long as we are togother everyhting will be fine as long as i am with you i know i will be happy i will feel safe i will feel loved and cared for, and i know i will love you the very smart guy with very yandsome face who keeps quizzing me keeps teaching me the very kind man who teart everyone and everything with a very kind soul, a veryyy very funny man, a strong soul , a very gentle man, a veryy hard working one i might have not said this before but i am really proud of all the work you do the studying helpig your parents taking care of everyone and being sooo nice and sweet and loving ,i can go on and onn about what i love about you but why i am in love with you it is because it is you, i really feel like you are my other half my better half i dont just feel empty with you you turned my life into a happy place with my only nightmare now being losing you<br><br>
+    now i know you have being busy lately and i know you will be busy more, and i want to thank you for spending all your lil free time with me and being so nice about me being greedy for you. the only thing i do when u arent talking to me is to do my work and daydream about making you food, cleaning for you taking care of you since i cant do it now i get to daydream about it and wait till i am your wife xx<br><br>
+    i really love you zain, and i hope you dont drink soo much redbull in this very worky week and get to spend some time with me* i am still greedy forgive me mi yandsome man* but i really really love you i cant wait till i get to annoy you wiht my questions before u sleep</p>
+  </div>
 
-            noClickCount++;
+  <div class="back-image" id="backImage">
+    <h2>Us 💖</h2>
+    <div class="i-love-you" id="iLoveYou">I love you!</div>
+  </div>
 
-            // Change the "Yes" button size and color
-            yesButtonSize += 100; // Increase font size by 10px
-            yesButton.style.fontSize = `${yesButtonSize}px`;
-            yesButton.style.backgroundColor = '#77dd77'; // Pastel green
-            yesButton.style.padding = `${yesButtonSize / 2}px ${yesButtonSize}px`; // Adjust padding
+  <script>
+    const envelope = document.getElementById('envelope');
+    const flap = document.getElementById('flap');
+    const letter = document.getElementById('letter');
+    const backImage = document.getElementById('backImage');
+    const iLoveYou = document.getElementById('iLoveYou');
+    const note1 = document.getElementById('note1');
+    const note2 = document.getElementById('note2');
+    const note3 = document.getElementById('note3');
 
-            // Change the "No" button color and move it around
-            noButton.style.backgroundColor = '#ff6961'; // Red
-            noButton.style.position = 'absolute';
-            noButton.style.left = `${Math.random() * 80 + 10}%`;
-            noButton.style.top = `${Math.random() * 80 + 10}%`;
+    let step = 0;
 
-            // Change the GIF based on the number of clicks
-            if (noClickCount === 1 || noClickCount === 2) {
-                gif.src = "https://media.tenor.com/hNhoZmyEjbUAAAAi/sanrio.gif";
-                alert("U sureee suree?");
-            } else if (noClickCount === 3) {
-                gif.src = "https://media.tenor.com/hNhoZmyEjbUAAAAj/sanrio.gif";
-                alert("Come on man!, don't you wanna get married u gaay");
-                noButton.style.display = 'none'; // Remove the no button
-            }
-        }
-    </script>
+    document.body.addEventListener('click', () => {
+      step++;
+      if (step === 1) {
+        flap.style.transform = 'rotateX(-120deg)';
+        // hide notes on first click to preserve original behavior
+        note1.style.display = 'none';
+        note2.style.display = 'none';
+        note3.style.display = 'none';
+      } else if (step === 2) {
+        letter.style.display = 'block';
+        envelope.style.display = 'none';
+      } else if (step === 3) {
+        letter.style.display = 'none';
+        backImage.style.display = 'flex';
+      } else if (step === 4) {
+        iLoveYou.style.display = 'block';
+      }
+    });
+
+    const heartsContainer = document.querySelector('.hearts');
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heartsContainer.appendChild(heart);
+    }
+  </script>
 </body>
 </html>
