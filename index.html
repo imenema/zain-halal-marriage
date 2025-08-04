@@ -168,15 +168,22 @@
   </div>
 
   <div class="note-container">
-    <div class="small-note" id="note1">Read from a very pretty lady 💌</div>
-    <div class="small-note" id="note2">Open me 💗</div>
-    <div class="small-note" id="note3">Read me yandsome ✨</div>
+    <div class="small-note" id="note"> <!-- Single note that updates -->
+      <!-- Content will change -->
+    </div>
   </div>
 
   <div class="message-container" id="letter">
-    <p>dear my very yandsome busy man,<br><br>
-    my sweet dashing man you are litterly the best things that ever happened to me, i will forever be greatful to have you in my life...<br><br>
-    [Letter content continues unchanged...]</p>
+    <p>
+      dear my very yandsome busy man,<br><br>
+      my sweet dashing man you are litterly the best things that ever happened to me, i will forever be greatful to have you in my life...<br><br>
+      i see how hard you work and i know sometimes you dont get the appreciation you deserve so im here to tell you that i see it, i see you baby. im so proud of you for pushing through even when it gets hard and exhausting. you are doing amazing. <br><br>
+      thank you for always being there for me, for making me laugh when im sad, for holding my hand when i cry, for being my safe place. i love how you always know what to say, how you always know how to make me smile, how you always put me first. <br><br>
+      i love your laugh, your eyes, your voice, your hugs, your kisses, your everything. i love how passionate you are about your dreams, how you never give up, how you always strive to be better. <br><br>
+      you are the love of my life and i cant wait to spend forever with you. <br><br>
+      love always,<br>
+      your biggest fan 💕
+    </p>
   </div>
 
   <div class="back-image" id="backImage">
@@ -190,9 +197,13 @@
     const letter = document.getElementById('letter');
     const backImage = document.getElementById('backImage');
     const iLoveYou = document.getElementById('iLoveYou');
-    const note1 = document.getElementById('note1');
-    const note2 = document.getElementById('note2');
-    const note3 = document.getElementById('note3');
+    const note = document.getElementById('note');
+
+    const notes = [
+      "Read from a very pretty lady 💌",
+      "Open me 💗",
+      "Read me yandsome ✨"
+    ];
 
     let step = 0;
 
@@ -203,18 +214,14 @@
           flap.style.transform = 'rotateX(-120deg)';
           break;
         case 2:
-          note1.style.display = 'block';
-          note1.style.animationDelay = '0s';
-          break;
         case 3:
-          note2.style.display = 'block';
-          note2.style.animationDelay = '0s';
-          break;
         case 4:
-          note3.style.display = 'block';
-          note3.style.animationDelay = '0s';
+          note.textContent = notes[step - 2];
+          note.style.display = 'block';
+          note.style.animation = 'pop 0.5s ease forwards';
           break;
         case 5:
+          note.style.display = 'none';
           letter.style.display = 'block';
           envelope.style.display = 'none';
           break;
