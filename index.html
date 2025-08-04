@@ -30,10 +30,8 @@
       box-shadow: inset 0 0 0 2px #fff4e0;
       cursor: pointer;
       margin-bottom: 30px;
-      /* envelope shape lines */
     }
 
-    /* Adding simple envelope lines */
     .envelope-wrapper::before {
       content: '';
       position: absolute;
@@ -60,7 +58,6 @@
       clip-path: polygon(100% 0, 100% 100%, 0 0);
     }
 
-    /* A fold line down center bottom */
     .envelope-wrapper .fold-line {
       position: absolute;
       bottom: 0;
@@ -105,6 +102,7 @@
 
     .back-image {
       display: none;
+      position: relative;
       width: 700px;
       height: 90vh;
       background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRPmqimPYFFfLyodJfY6bMsQrU4_03auc3pA&s');
@@ -113,6 +111,17 @@
       background-position: center;
       border-radius: 10px;
       margin-top: 20px;
+    }
+
+    .back-image .center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 48px;
+      font-weight: bold;
+      color: red;
+      font-family: 'Times New Roman', serif;
     }
 
     .i-love-you {
@@ -145,7 +154,9 @@
     i really love you zain, and i hope you dont drink soo much redbull in this very worky week and get to spend some time with me* i am still greedy forgive me mi yandsome man* but i really really love you i cant wait till i get to annoy you wiht my questions before u sleep</p>
   </div>
 
-  <div class="back-image" id="backImage"></div>
+  <div class="back-image" id="backImage">
+    <div class="center-text">us</div>
+  </div>
 
   <div class="i-love-you" id="iLoveYou">I love you!</div>
 
@@ -164,30 +175,23 @@
 
     let step = 0;
 
-    // Listen for clicks anywhere on the page (body)
     document.body.addEventListener('click', () => {
       step++;
       if (step === 1) {
-        // Show first note
         note.textContent = notes[0];
         note.style.display = 'block';
       } else if (step > 1 && step <= 3) {
-        // Cycle notes text
         note.textContent = notes[step - 1];
       } else if (step === 4) {
-        // Hide note, show letter, hide envelope
         note.style.display = 'none';
         letter.style.display = 'block';
         envelope.style.display = 'none';
       } else if (step === 5) {
-        // Show back image
         letter.style.display = 'none';
         backImage.style.display = 'block';
       } else if (step === 6) {
-        // Show "I love you"
         iLoveYou.style.display = 'block';
       } else {
-        // Reset all
         step = 0;
         iLoveYou.style.display = 'none';
         backImage.style.display = 'none';
