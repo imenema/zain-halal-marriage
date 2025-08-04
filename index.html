@@ -163,7 +163,8 @@
 
     let step = 0;
 
-    envelope.addEventListener('click', () => {
+    // Listen for clicks anywhere on the page (body)
+    document.body.addEventListener('click', () => {
       step++;
       if (step === 1) {
         // Show first note
