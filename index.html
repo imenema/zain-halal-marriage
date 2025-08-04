@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>For Zain</title>
   <style>
     body {
@@ -52,10 +52,14 @@
       position: relative;
       width: 220px;
       height: 140px;
-      background-color: #997662;
+      background: linear-gradient(135deg, #e8dbc7, #d1bfa3);
+      border: 2px solid #8b6f50;
+      box-shadow: inset 0 0 0 2px #fff4e0;
       cursor: pointer;
       z-index: 1;
       margin-bottom: 40px;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      overflow: hidden;
     }
 
     .flap {
@@ -64,46 +68,55 @@
       left: 0;
       width: 100%;
       height: 50%;
-      background-color: #997662;
+      background: linear-gradient(135deg, #cdb7a0, #a98b6f);
       border-bottom: 2px solid #805e4b;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
       transition: transform 0.6s ease;
       z-index: 3;
     }
 
-    @keyframes pop {
-      0% {
-        transform: scale(0.5);
-        opacity: 0;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
+    .envelope-wrapper::before,
+    .envelope-wrapper::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      background: #a98b6f;
+      top: 0;
+    }
+
+    .envelope-wrapper::before {
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: top left;
+    }
+
+    .envelope-wrapper::after {
+      right: 0;
+      transform: rotate(-45deg);
+      transform-origin: top right;
     }
 
     .note-container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
       z-index: 2;
     }
 
     .small-note {
+      display: none;
       font-size: 18px;
       background: #fff;
       padding: 10px 20px;
       border-radius: 8px;
       color: #000;
-      width: max-content;
       text-align: center;
       font-weight: normal;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       user-select: none;
       cursor: default;
-      display: none;
-      opacity: 0;
-      transform: scale(0.5);
+      border: 1px solid #aaa;
     }
 
     .message-container {
@@ -166,7 +179,7 @@
   </div>
 
   <div class="note-container">
-    <div class="small-note" id="note"></div>
+    <div class="small-note" id="note">Read from a very pretty lady 💌</div>
   </div>
 
   <div class="message-container" id="letter">
@@ -197,25 +210,13 @@
 
     let step = 0;
 
-    function resetAll() {
-      flap.style.transform = 'none';
-      note.style.display = 'none';
-      note.textContent = '';
-      letter.style.display = 'none';
-      backImage.style.display = 'none';
-      iLoveYou.style.display = 'none';
-      envelope.style.display = 'block';
-      step = 0;
-    }
-
     document.body.addEventListener('click', () => {
       step++;
       if (step === 1) {
         flap.style.transform = 'rotateX(-120deg)';
-      } else if (step >= 2 && step <= 4) {
         note.style.display = 'block';
+      } else if (step >= 2 && step <= 4) {
         note.textContent = notes[step - 2];
-        note.style.animation = 'pop 0.5s ease forwards';
       } else if (step === 5) {
         note.style.display = 'none';
         letter.style.display = 'block';
@@ -225,8 +226,16 @@
         backImage.style.display = 'flex';
       } else if (step === 7) {
         iLoveYou.style.display = 'block';
-      } else if (step === 8) {
-        resetAll();
+      } else {
+        // Reset
+        step = 0;
+        iLoveYou.style.display = 'none';
+        backImage.style.display = 'none';
+        letter.style.display = 'none';
+        envelope.style.display = 'block';
+        flap.style.transform = 'none';
+        note.textContent = notes[0];
+        note.style.display = 'none';
       }
     });
 
