@@ -86,7 +86,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
       z-index: 2;
     }
 
@@ -102,10 +101,9 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       user-select: none;
       cursor: default;
+      display: none;
       opacity: 0;
       transform: scale(0.5);
-      animation: pop 0.5s ease forwards;
-      display: none;
     }
 
     .message-container {
@@ -168,22 +166,14 @@
   </div>
 
   <div class="note-container">
-    <div class="small-note" id="note"> <!-- Single note that updates -->
-      <!-- Content will change -->
-    </div>
+    <div class="small-note" id="note"></div>
   </div>
 
   <div class="message-container" id="letter">
-    <p>
-      dear my very yandsome busy man,<br><br>
-      my sweet dashing man you are litterly the best things that ever happened to me, i will forever be greatful to have you in my life...<br><br>
-      i see how hard you work and i know sometimes you dont get the appreciation you deserve so im here to tell you that i see it, i see you baby. im so proud of you for pushing through even when it gets hard and exhausting. you are doing amazing. <br><br>
-      thank you for always being there for me, for making me laugh when im sad, for holding my hand when i cry, for being my safe place. i love how you always know what to say, how you always know how to make me smile, how you always put me first. <br><br>
-      i love your laugh, your eyes, your voice, your hugs, your kisses, your everything. i love how passionate you are about your dreams, how you never give up, how you always strive to be better. <br><br>
-      you are the love of my life and i cant wait to spend forever with you. <br><br>
-      love always,<br>
-      your biggest fan 💕
-    </p>
+    <p>dear my very yandsome busy man,<br><br>
+    my sweet dashing man you are litterly the best things that ever happened to me, i will forever be greatful to have you in my life and i truly mean it, i got very lucky with you i got to have someone who makes me laugh smile soo much that i am pretty sure at this rate i am gonna end up with ealry smile lines, someone who is always here to comfornnt me when i cry, care for me listen to me, spend time with me all your free time which i am truly greatful for that i know that you know that i miss you and i do, i miss playing with yoou , watching shows with you , talking till the morning and having u telling me to let u go sleep only for me to ask u annoying my stupid questions and it is not because iyou aren't giving me enough attention or not spending enough time with me (24h a day would still not be enough), i miss talking to you even when i am talking to you, my mind can't spend a second without you that i start feeling missing a peice when you arent here ,you are the only  person or even thing that the only time i stop thinking of you is when i am talking to you or when i am sleeping because i get to dream of you, i spend hours of my day worrying or being sad or stressed but the second i hear your voice i get instant comfort it feels like all of the seond everything will be fine, one thing you said at the start that stuck with me because i never related to something more than that ever the only thing you kept thinking of as long as we are togother everyhting will be fine as long as i am with you i know i will be happy i will feel safe i will feel loved and cared for, and i know i will love you the very smart guy with very yandsome face who keeps quizzing me keeps teaching me the very kind man who teart everyone and everything with a very kind soul, a veryyy very funny man, a strong soul , a very gentle man, a veryy hard working one i might have not said this before but i am really proud of all the work you do the studying helpig your parents taking care of everyone and being sooo nice and sweet and loving ,i can go on and onn about what i love about you but why i am in love with you it is because it is you, i really feel like you are my other half my better half i dont just feel empty with you you turned my life into a happy place with my only nightmare now being losing you<br><br>
+    now i know you have being busy lately and i know you will be busy more, and i want to thank you for spending all your lil free time with me and being so nice about me being greedy for you. the only thing i do when u arent talking to me is to do my work and daydream about making you food, cleaning for you taking care of you since i cant do it now i get to daydream about it and wait till i am your wife xx<br><br>
+    i really love you zain, and i hope you dont drink soo much redbull in this very worky week and get to spend some time with me* i am still greedy forgive me mi yandsome man* but i really really love you i cant wait till i get to annoy you wiht my questions before u sleep</p>
   </div>
 
   <div class="back-image" id="backImage">
@@ -207,33 +197,36 @@
 
     let step = 0;
 
+    function resetAll() {
+      flap.style.transform = 'none';
+      note.style.display = 'none';
+      note.textContent = '';
+      letter.style.display = 'none';
+      backImage.style.display = 'none';
+      iLoveYou.style.display = 'none';
+      envelope.style.display = 'block';
+      step = 0;
+    }
+
     document.body.addEventListener('click', () => {
       step++;
-      switch (step) {
-        case 1:
-          flap.style.transform = 'rotateX(-120deg)';
-          break;
-        case 2:
-        case 3:
-        case 4:
-          note.textContent = notes[step - 2];
-          note.style.display = 'block';
-          note.style.animation = 'pop 0.5s ease forwards';
-          break;
-        case 5:
-          note.style.display = 'none';
-          letter.style.display = 'block';
-          envelope.style.display = 'none';
-          break;
-        case 6:
-          letter.style.display = 'none';
-          backImage.style.display = 'flex';
-          break;
-        case 7:
-          iLoveYou.style.display = 'block';
-          break;
-        default:
-          break;
+      if (step === 1) {
+        flap.style.transform = 'rotateX(-120deg)';
+      } else if (step >= 2 && step <= 4) {
+        note.style.display = 'block';
+        note.textContent = notes[step - 2];
+        note.style.animation = 'pop 0.5s ease forwards';
+      } else if (step === 5) {
+        note.style.display = 'none';
+        letter.style.display = 'block';
+        envelope.style.display = 'none';
+      } else if (step === 6) {
+        letter.style.display = 'none';
+        backImage.style.display = 'flex';
+      } else if (step === 7) {
+        iLoveYou.style.display = 'block';
+      } else if (step === 8) {
+        resetAll();
       }
     });
 
