@@ -117,6 +117,14 @@
       border-radius: 10px;
       margin-top: 20px;
     }
+    image-wrapper .us-text {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 48px;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
 
     .i-love-you {
       display: none;
@@ -167,32 +175,26 @@
 
     let step = 0;
 
-    document.body.addEventListener('click', () => {
+      document.body.addEventListener('click', () => {
       step++;
       if (step === 1) {
-        // Show first note
         note.textContent = notes[0];
         note.style.display = 'block';
       } else if (step > 1 && step <= 3) {
-        // Cycle notes text
         note.textContent = notes[step - 1];
       } else if (step === 4) {
-        // Hide note, show letter, hide envelope
         note.style.display = 'none';
         letter.style.display = 'block';
         envelope.style.display = 'none';
       } else if (step === 5) {
-        // Show back image
         letter.style.display = 'none';
-        backImage.style.display = 'block';
+        imageWrapper.style.display = 'block';
       } else if (step === 6) {
-        // Show "I love you"
         iLoveYou.style.display = 'block';
       } else {
-        // Reset all
         step = 0;
         iLoveYou.style.display = 'none';
-        backImage.style.display = 'none';
+        imageWrapper.style.display = 'none';
         letter.style.display = 'none';
         note.style.display = 'none';
         envelope.style.display = 'block';
